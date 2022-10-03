@@ -1,9 +1,3 @@
 # IBM-Project-32614-1660211007
 # News Tracker Application
 
-# TEAM MEMBERS
-
-  @ TEAM LEADER - DEEPIKA 
-  @ MEENA KUMARI 
-  @ GEETHANJALI 
-  @ DHANNUSH 
