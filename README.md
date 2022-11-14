@@ -13,3 +13,9 @@
 
 ## The database will have all the details and the user can search the news by using a search bar.
 
+## ....Team members....
+
+##  DEEPIKA R 
+##    MEENAKUMARI G 
+##       GEETHANJALI R 
+##              DHANNUSH S 
