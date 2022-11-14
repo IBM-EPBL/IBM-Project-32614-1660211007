@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HEY Check your WEATHER in your CITY</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+
+     <style>
+
+
+         .shadow {
+             background-image: url("https://scied.ucar.edu/sites/default/files/media/images/weather_0.jpg");
+             color: darkslategray;
+             text-align: center;
+             font-size: 25px;
+             font-weight: bolder;
+
+             padding: 10px;
+
+
+             box-shadow: 5px 10px grey inset;
+         }
+
+
+            a {
+  color: black;
+  font-size: larger;
+  font-weight: bold;
+}
+
+            .shadows {
+             box-sizing: content-box;
+            width: 300px;
+            height: 100px;
+            color:black;
+            font-size: 25px;
+            font-weight: bold;
+            position: absolute;
+            padding: 10px;
+            background-image: url("https://cdn.pixabay.com/photo/2016/07/09/07/48/blue-sky-1505848_1280.jpg");
+            margin: 20px;
+
+        }
+
+
+         body {
+ background-image: url("https://www.wallpapertip.com/wmimgs/190-1902502_desktop-backgrounds-clouds.jpg");
+             background-size: 1500px 1000px;
+}
+         </style>
+</head>
+
+<body>
+ <div class="shadow">
+  <form  autocomplete="off">
+      <div class="form-group">
+          <label>TYPE YOUR CITY AND CHECK WHAT'S THE WEATHER OUTSIDE</label>
+      </div>
+   </form>
+ </div>
+
+ <div class="home page">
+  <form  autocomplete="off">
+      <div class="form-group">
+           <a class="active" href="http://127.0.0.1:5000/news">BACK TO HOME PAGE</a>
+      </div>
+   </form>
+ </div>
+
+
+ <div class="shadows">
+  <form  autocomplete="off">
+      <div class="form-group">
+          <label>“If you wait long enough, it will be good weather.” </label>
+       </div>
+
+
+
+  </form>
+ </div>
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    <form method="POST">
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                <input class="input" name="city" type="text" placeholder="City Name">
+                            </div>
+                            <div class="control">
+                                <button class="button is-info">
+                                    Add City
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    {% for weather in weather_data %}
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span class="title">{{ weather.city }}</span>
+                                        <br>
+                                        <span class="subtitle">{{ weather.temperature }}° F</span>
+                                        <br> {{ weather.description }}
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    </footer>
+
+<script>
+  window.watsonAssistantChatOptions = {
+    integrationID: "b6b55f24-6ef8-4584-af7f-f2ecb93c9c66", // The ID of this integration.
+    region: "au-syd", // The region your integration is hosted in.
+    serviceInstanceID: "296aa6c9-fc6a-46e3-b1cf-04917e3e4abf", // The ID of your service instance.
+    onLoad: function(instance) { instance.render(); }
+  };
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+    document.head.appendChild(t);
+  });
+</script>
+
+</body>
+
+</html>
+
+
+
