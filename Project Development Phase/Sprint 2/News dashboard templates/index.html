@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='myfont/css/all.min.css')}}">
+    <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+     <style>
+
+
+
+         body {
+ background-image: url("https://www.fclighting.com/wp-content/uploads/2021/03/Reading_News-1024x670.jpg");
+             background-size: 1500px 1000px;
+}
+        .shadow {
+            color: darkslategray;
+            font-size: 25px;
+
+            padding: 10px;
+            box-shadow: 5px 5px 8px blue, 10px 10px 8px red, 15px 15px 8px green;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" id="home" href="/">Home Page</a>
+          <a class="nav-item nav-link" id="signUp" href="http://127.0.0.1:5000/register">Sign Up</a>
+        </div>
+      </div>
+    </nav>
+    <div class="container" style="margin-top:100px">
+        <div class="col-md-offset-1 col-md-10" >
+            <div class="col-md-offset-3 col-md-5">
+                <div class="shadow">
+                <form action="/login" method="POST" autocomplete="off">
+
+                    <h3 style="color: #2ecc71" class="page-header text-primary">NEWS TRACKER</h3>
+
+                     {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category,message in messages %}
+                        <div class="alert alert-{{category}}">{{message}}</div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+                    <div class="form-group">
+                        <label>username</label>
+                        <input type="text" name="username" id="username"  class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>password</label>
+                        <input type="password" name="password" id="password"  class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="login" class="btn btn-success btn-block">
+                        <a href="{{url_for('register')}}" class="btn btn-primary btn-block">Register</a>
+                    </div>
+                </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    $(document).ready(function(){
+        $(".alert").hide(3000)
+    });
+</script>
