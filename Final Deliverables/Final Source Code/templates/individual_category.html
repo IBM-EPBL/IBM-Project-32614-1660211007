@@ -1,0 +1,255 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Tracker Application - {{article_category.capitalize()}}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    {% if session %}
+        <!-- <h1>Welcome <span class="text-green-500">{{session.userinfo.name}}</span>!</h1>
+        <p><a href="/logout">Logout</a></p> -->
+        <!-- <div><pre>{{pretty}}</pre></div> -->
+        <header>
+          <nav class="flex flex-wrap items-center justify-between w-full py-4 md:py-0 px-4 text-lg text-gray-700 bg-white">
+            <div class="flex  flex-wrap justify-center items-center">
+              <a href="/" class="w-16 block mx-4">
+                <img src="../static/images/logo.svg" alt="">
+              </a>
+              <!-- <form action="/search" method="post" class="flex flex-col justify-center">
+                <input type="text" name="search" id="search" class="border my-4"/>
+              </form> -->
+              <form action="/search" method="post" class="flex items-center justify-center m-auto">
+                <div class="flex flex-col items-center justify-center">
+                  <input type="text" name="search" id="search" class="border border-purple-800 rounded-md px-2 m-1"/>
+                </div>
+              </form>
+             </div>
+            
+              <svg
+                 xmlns="http://www.w3.org/2000/svg"
+                 id="menu-button"
+                 class="h-6 w-6 cursor-pointer md:hidden block"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke="currentColor"
+               >
+                 <path
+                   stroke-linecap="round"
+                   stroke-linejoin="round"
+                   stroke-width="2"
+                   d="M4 6h16M4 12h16M4 18h16"
+                 />
+               </svg>
+            <div class="hidden w-full md:flex md:items-center md:w-auto" id="menu">
+               <ul
+                 class="
+                   pt-4
+                   text-base text-gray-700
+                   md:flex
+                   md:justify-between 
+                   md:pt-0"
+               >
+                 <li>
+                   <a class="md:p-4 py-2 block hover:text-purple-400" href="/">All categories</a>
+                 </li>
+                 <!-- <li>
+                   <a class="md:p-4 py-2 block hover:text-purple-400" href="#">All Sources</a>
+                 </li> -->
+                 <li class="flex items-center">
+                  <select name="categories" id="categories">
+                    <!-- "business", "entertainment", "general", "health", "science", "sports", "technology" -->
+                    <option value="" selected>All categories</option>
+                    {% for category in categories %}
+                      {% if(category == article_category)%}
+                        <option value="{{ category }}" selected>{{ category.capitalize() }}</option>
+                      {% else %}
+                        <option value="{{ category }}">{{ category.capitalize() }}</option>
+                      {% endif %}
+                    {% endfor %}
+                    <!-- <option value="business">Business</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="general">General</option>
+                    <option value="health">Health</option>
+                    <option value="science">Science</option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option> -->
+                  </select>
+                 </li>
+                 <li>
+                  {% if session %}
+                    <a class="md:p-4 py-2 block hover:text-purple-400 text-purple-500" href="/user-info">{{ session.userinfo.name }}</a>
+                  {% else %}
+                    <a class="md:p-4 py-2 block hover:text-purple-400 text-purple-500" href="/login">Log in</a>
+                  {% endif %}
+                 </li>
+                 <li>
+                  {% if session %}
+                    <a class="md:p-4 py-2 block hover:text-purple-400 text-purple-500" href="/logout">Log out</a>
+                  {% endif %}
+                 </li>
+               </ul>
+             </div>
+         </nav>
+       </header>
+       <!-- {{ all_articles }} -->
+       <div class="w-3/4 mx-auto">
+         <h2 class="text-2xl">{{ article_category.capitalize() }}</h2>
+       </div>
+       <div class="flex flex-wrap w-4/5 mx-auto mb-8 pb-8">
+          {% for i in range(50): %}
+              {% if(articles['articles'][i]) %}
+              <div class="w-72 h-96 m-4 rounded-lg hover:bg-purple-600 cursor-pointer drop-shadow-2xl" style="background: #ffffff;">
+                  <div class="flex flex-col justify-between">
+                    <div class="pb-2">
+                      <img src="{{ articles['articles'][i]['urlToImage'] }}" alt="" class="h-48 w-96 rounded-t-lg">
+                    </div>
+                    <div class="flex flex-col justify-between">
+                      <div class="px-4 h-32">
+                        {{ articles['articles'][i]['title'] }}
+                      </div>
+                      <div class="hover:text-purple-900 text-purple-700 px-4">
+                        <!-- style="color: #7B2CBF;"  -->
+                        <a href="{{ articles['articles'][i]['url'] }}" target="_blank">Read more...</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+          {% endfor %}
+        </div>
+    {% else %}
+        <header>
+          <nav class="flex flex-wrap items-center justify-between w-full py-4 md:py-0 px-4 text-lg text-gray-700 bg-white">
+            <div class="flex  flex-wrap justify-center items-center">
+              <a href="/" class="w-16 block">
+                <img src="../static/images/logo.svg" alt="">
+              </a>
+              <!-- <form action="/search" method="post" class="flex flex-col justify-center">
+                <input type="text" name="search" id="search" class="border my-4"/>
+              </form> -->
+              <form action="/search" method="post" class="flex items-center justify-center m-auto">
+                <div class="flex flex-col items-center justify-center">
+                  <input type="text" name="search" id="search" class="border border-purple-800 rounded-md px-2 m-1"/>
+                </div>
+              </form>
+            </div>
+            
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                id="menu-button"
+                class="h-6 w-6 cursor-pointer md:hidden block"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            <div class="hidden w-full md:flex md:items-center md:w-auto" id="menu">
+              <ul
+                class="
+                  pt-4
+                  text-base text-gray-700
+                  md:flex
+                  md:justify-between 
+                  md:pt-0"
+              >
+                <li class="flex items-center">
+                  <select name="categories" id="categories">
+                    <!-- "business", "entertainment", "general", "health", "science", "sports", "technology" -->
+                    <option value="" selected>All categories</option>
+                    {% for category in categories %}
+                      {% if(category == article_category)%}
+                        <option value="{{ category }}" selected>{{ category.capitalize() }}</option>
+                      {% else %}
+                        <option value="{{ category }}">{{ category.capitalize() }}</option>
+                      {% endif %}
+                    {% endfor %}
+                    <!-- <option value="business">Business</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="general">General</option>
+                    <option value="health">Health</option>
+                    <option value="science">Science</option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option> -->
+                  </select>
+                </li>
+                <li>
+                  {% if session %}
+                    <a class="md:p-4 py-2 block hover:text-purple-400 text-purple-500" href="/user-info">{{ session.userinfo.name }}</a>
+                  {% else %}
+                    <a class="md:p-4 py-2 block hover:text-purple-400 text-purple-500" href="/login">Log in</a>
+                  {% endif %}
+                </li>
+                <li>
+                  {% if session %}
+                    <a class="md:p-4 py-2 block hover:text-purple-400 text-purple-500" href="/logout">Log out</a>
+                  {% endif %}
+                </li>
+              </ul>
+            </div>
+        </nav>
+      </header>
+      <div class="w-3/4 mx-auto">
+        <h2 class="text-2xl">{{ article_category.capitalize() }}</h2>
+      </div>
+      <div class="flex flex-wrap w-4/5 mx-auto mb-8 pb-8">
+        {% for i in range(50): %}
+            {% if(articles['articles'][i]) %}
+            <div class="w-72 h-96 m-4 rounded-lg hover:bg-purple-600 cursor-pointer drop-shadow-2xl" style="background: #ffffff;">
+                <div class="flex flex-col justify-between">
+                  <div class="pb-2">
+                    <img src="{{ articles['articles'][i]['urlToImage'] }}" alt="" class="h-48 w-96 rounded-t-lg">
+                  </div>
+                  <div class="flex flex-col justify-between">
+                    <div class="px-4 h-32">
+                      {{ articles['articles'][i]['title'] }}
+                    </div>
+                    <div class="hover:text-purple-900 text-purple-700 px-4">
+                      <!-- style="color: #7B2CBF;"  -->
+                      <a href="{{ articles['articles'][i]['url'] }}" target="_blank">Read more...</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+         {% endfor %}
+      </div>
+      <!-- {} -->
+    {% endif %}
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <script src="/static/javascript/main.js"></script>
+    <script>
+      const button = document.querySelector('#menu-button');
+      const menu = document.querySelector('#menu');
+
+      console.log(button)
+
+
+      button.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        console.log(menu.classList)
+      });
+
+      window.watsonAssistantChatOptions = {
+        integrationID: "1713fc16-946a-4bc2-ad0a-52f55338a079", // The ID of this integration.
+        region: "jp-tok", // The region your integration is hosted in.
+        serviceInstanceID: "fc27de01-58f5-4803-9744-ec8799654c59", // The ID of your service instance.
+        onLoad: function(instance) { instance.render(); }
+      };
+      setTimeout(function(){
+        const t=document.createElement('script');
+        t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+        document.head.appendChild(t);
+      });
+    </script>
+  </body>
+</html>

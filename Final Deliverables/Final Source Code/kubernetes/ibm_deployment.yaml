@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: news-tracker
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: news-tracker
+  template:
+    metadata:
+      labels:
+        app: news-tracker
+
+    spec:
+      containers:
+        - name: news-tracker-container
+          image: jp.icr.io/ibm_assignment/news-tracker@sha256:3bf02308dda2de97eab41f9df509dbd46b43a3f827d93c792290c38b785d2d3e
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+              protocol: TCP

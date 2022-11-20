@@ -1,0 +1,108 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth0 Example</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    {% if session %}
+        <!-- <h1>Welcome <span class="text-green-500">{{session.userinfo.name}}</span>!</h1>
+        <p><a href="/logout">Logout</a></p> -->
+        <!-- <div><pre>{{pretty}}</pre></div> -->
+        <header>
+          <nav class="flex flex-wrap items-center justify-between w-full py-4 md:py-0 px-4 text-lg text-gray-700 bg-white">
+            <div>
+              <a href="/">
+                <img src="../static/images/logo.svg" alt="" class="w-24">
+              </a>
+              <form action="/search">
+                <input type="text" name="search" id="search">
+              </form>
+             </div>
+            
+              <svg
+                 xmlns="http://www.w3.org/2000/svg"
+                 id="menu-button"
+                 class="h-6 w-6 cursor-pointer md:hidden block"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke="currentColor"
+               >
+                 <path
+                   stroke-linecap="round"
+                   stroke-linejoin="round"
+                   stroke-width="2"
+                   d="M4 6h16M4 12h16M4 18h16"
+                 />
+               </svg>
+            
+            <div class="hidden w-full md:flex md:items-center md:w-auto" id="menu">
+               <ul
+                 class="
+                   pt-4
+                   text-base text-gray-700
+                   md:flex
+                   md:justify-between 
+                   md:pt-0"
+               >
+                 <li>
+                   <a class="md:p-4 py-2 block hover:text-purple-400" href="#">All categories</a>
+                 </li>
+                 <li>
+                   <a class="md:p-4 py-2 block hover:text-purple-400" href="#">All Sources</a>
+                 </li>
+                 <li>
+                  <select name="categories" id="categories">
+                    <!-- "business", "entertainment", "general", "health", "science", "sports", "technology" -->
+                    {% for category in categories %}
+                      <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                  </select>
+                 </li>
+                 
+                 <li>
+                  {% if session %}
+                    <a class="md:p-4 py-2 block hover:text-purple-400 text-purple-500" href="/user-info">User</a>
+                  {% else %}
+                    <a class="md:p-4 py-2 block hover:text-purple-400 text-purple-500" href="/login">Log in</a>
+                  {% endif %}
+                 </li>
+               </ul>
+             </div>
+         </nav>
+       </header>
+       {{ search_results }}
+    {% else %}
+        <h1>Welcome Guest</h1>
+        <p><a href="/login">Login</a></p>
+    {% endif %}
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <script src="../static/javascript/main.js"></script>
+    <script>
+      const button = document.querySelector('#menu-button');
+      const menu = document.querySelector('#menu');
+
+      console.log(button)
+
+      button.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        console.log(menu.classList)
+      });
+
+      
+      // window.watsonAssistantChatOptions = {
+      //   integrationID: "c17bc8aa-990a-43e0-8d08-964f68a23c1d", // The ID of this integration.
+      //   region: "jp-tok", // The region your integration is hosted in.
+      //   serviceInstanceID: "fc27de01-58f5-4803-9744-ec8799654c59", // The ID of your service instance.
+      //   onLoad: function(instance) { instance.render(); }
+      // };
+      // setTimeout(function(){
+      //   const t=document.createElement('script');
+      //   t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+      //   document.head.appendChild(t);
+      // });
+    </script>
+  </body>
+</html>

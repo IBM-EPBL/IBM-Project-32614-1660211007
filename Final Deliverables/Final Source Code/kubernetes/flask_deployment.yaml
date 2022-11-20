@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: news-tracker
+
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: news-tracker
+  template:
+    metadata:
+      labels:
+        app: news-tracker
+
+    spec:
+      containers:
+        - name: news-tracker-container
+          image: news-tracker
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+              protocol: TCP
